@@ -4,13 +4,10 @@ const Intern = require("./lib/Intern.js");
 const Engineer = require("./lib/Engineer.js");
 const Manager = require("./lib/Manager.js");
 
+// //console.log(
+//   `Welcome to Team Profile Generator. Use 'npm run reset' to reset the dist folder. Build your team`
+// );
 managerQuestions = [
-  //Need an intro that says:
-  //Welcome to Team Profile Generator
-  //Use 'npm run reset' to reset the dist folder
-  //Build your team - (need to add this)
-
-  //buildTeam is not called anywhere/made anywhere
   {
     type: "input",
     message: "What is the team manager's name?",
@@ -109,15 +106,64 @@ internQuestions = [
   },
 ];
 
-var engineers = new Array();
-var manager = new Array();
-var interns = new Array();
+// var engineers = new Array();
+// var manager = new Array();
+// var interns = new Array();
 
-function generateIndexHtml() {}
+const employee = [];
+
+function generateIndexHtml() {
+  const page = `<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Team Profile Generator</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div>
+      <div class="card" style="width: 18rem">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+          <p class="card-text">
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+          </p>
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+      </div>
+      <!-- cards here -->
+      <ul>
+       ${employee.map(
+         (employee) => `<li> ${employee.name}</li>
+       <li> ${employee.id}</li>
+       <li> ${employee.email}</li>
+       <li> ${employee.officeNumber}</li>`
+       )}
+
+       </ul>
+  
+      <!--icon for what is picked -->
+    </div>
+    <style>
+      /* add styling here */
+    </style>
+  </body>
+</html>
+`;
+  fs.writeFileSync(`./dist/fileName.html`, page);
+}
 
 inquirer.prompt(managerQuestions).then((data) => {
-  console.log(data);
   addManager(data);
+
   if (data.type == "Engineer") {
     addEngineer();
   } else if (data.type == "Intern") {
@@ -130,7 +176,8 @@ inquirer.prompt(managerQuestions).then((data) => {
 function addIntern() {
   inquirer.prompt(internQuestions).then((data) => {
     var newIntern = new Intern(data.name, data.id, data.email);
-    interns.push(newIntern);
+    console.log(`Intern Added!`);
+    employee.push(newIntern);
     addNextPerson(data.type);
   });
 }
@@ -138,7 +185,8 @@ function addIntern() {
 function addEngineer() {
   inquirer.prompt(engineerQuestions).then((data) => {
     var newEngineer = new Engineer(data.name, data.id, data.email);
-    engineers.push(newEngineer);
+    console.log(`Engineer Added!`);
+    employee.push(newEngineer);
     addNextPerson(data.type);
   });
 }
@@ -150,19 +198,22 @@ function addManager(data) {
     data.email,
     data.officeNumber
   );
-  manager.push(newManager);
-  addNextPerson(data.type);
+  console.log(`Manager Added!`);
+  employee.push(newManager);
+  addNextPerson(data);
 }
 
 function addNextPerson(choice) {
-  if (choice == "Engineer") {
+  if (choice === "Engineer") {
     addEngineer();
-  } else if (choice == "Intern") {
+  } else if (choice === "Intern") {
     addIntern();
   } else {
     generateIndexHtml();
   }
 }
+
+//console log of what occured 'team manager added' 'team engineer added'
 
 //test then classes then contsruct the quesitons after everything passes
 
