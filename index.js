@@ -92,7 +92,7 @@ internQuestions = [
   {
     type: "input",
     message: "What is the intern's school?",
-    name: "GitHub",
+    name: "school",
   },
   {
     type: "list",
@@ -110,9 +110,9 @@ internQuestions = [
 // var manager = new Array();
 // var interns = new Array();
 
-const employee = [];
+let employee = [];
 
-function generateIndexHtml() {
+function generateIndexHtml(employee) {
   const page = `<!DOCTYPE html>
 <html lang="en">
   <head>
@@ -139,16 +139,10 @@ function generateIndexHtml() {
           <a href="#" class="card-link">Another link</a>
         </div>
       </div>
-      <!-- cards here -->
-      <ul>
-       ${employee.map(
-         (employee) => `<li> ${employee.name}</li>
-       <li> ${employee.id}</li>
-       <li> ${employee.email}</li>
-       <li> ${employee.officeNumber}</li>`
-       )}
 
-       </ul>
+      ${generateEmployeeCard(employee)}
+
+      <!-- cards here -->
   
       <!--icon for what is picked -->
     </div>
@@ -164,13 +158,13 @@ function generateIndexHtml() {
 inquirer.prompt(managerQuestions).then((data) => {
   addManager(data);
 
-  if (data.type == "Engineer") {
-    addEngineer();
-  } else if (data.type == "Intern") {
-    addIntern();
-  } else {
-    return;
-  }
+  // if (data.type == "Engineer") {
+  //   addEngineer();
+  // } else if (data.type == "Intern") {
+  //   addIntern();
+  // } else {
+  //   return;
+  // }
 });
 
 function addIntern() {
@@ -200,17 +194,64 @@ function addManager(data) {
   );
   console.log(`Manager Added!`);
   employee.push(newManager);
-  addNextPerson(data);
+  addNextPerson(data.type);
 }
 
 function addNextPerson(choice) {
-  if (choice === "Engineer") {
+  if (choice == "Engineer") {
     addEngineer();
-  } else if (choice === "Intern") {
+  } else if (choice == "Intern") {
     addIntern();
   } else {
-    generateIndexHtml();
+    generateIndexHtml(employee);
   }
+}
+
+function generateEmployeeCard(employee) {
+  console.log(employee);
+  employee.map((employee) => {
+    if (employee == "Engineer") {
+      return `<ul>
+      <li> ${employee.name}
+      
+      </li>
+      <li> ${employee.id}
+      
+      </li>
+      <li> ${employee.email}
+      
+      </li>
+      <li> ${employee.GitHub}
+      
+      </li>
+      </ul>`;
+    } else {
+      return `To be added later`;
+    }
+  });
+}
+function generateEmployeeCard(employee) {
+  console.log(employee);
+  employee.map((employee) => {
+    if (employee == "Intern") {
+      return `<ul>
+      <li> ${employee.name}
+      
+      </li>
+      <li> ${employee.id}
+      
+      </li>
+      <li> ${employee.email}
+      
+      </li>
+      <li> ${employee.school}
+      
+      </li>
+      </ul>`;
+    } else {
+      return `To be added later`;
+    }
+  });
 }
 
 //console log of what occured 'team manager added' 'team engineer added'
