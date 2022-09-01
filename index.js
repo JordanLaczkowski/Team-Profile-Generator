@@ -125,6 +125,7 @@ function generateIndexHtml(employee) {
     />
   </head>
   <body>
+  <div class="flex-container">
       ${generateEmployeeCard(employee)}
       <!-- cards here -->
   
@@ -201,36 +202,39 @@ function generateEmployeeCard(employee) {
       addHTML =
         addHTML +
         `
-      <div class="card" style="width: 18rem">
+      <div class="card" style="width: 18rem; display: -webkit-inline-box">
         <div class="card-body">
           <h5 class="card-title">${employee[i].name}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">${employee[i].id}</h6>
-          <a href="#" class="card-link">${employee[i].email}</a>
-          <a href="#" class="card-link">${employee[i].officeNumber}</a>
+          <h5 class="card-title">${employee[i].constructor.name}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">ID: ${employee[i].id}</h6>
+          <a href="#" class="card-link">Email: ${employee[i].email}</a>
+          <a href="#" class="card-link">Office Number: ${employee[i].officeNumber}</a>
         </div>`;
     } else if (employee[i].constructor.name == "Engineer") {
       console.log("we have an Engineer");
       addHTML =
         addHTML +
         `
-      <div class="card" style="width: 18rem">
+      <div class="card" style="width: 18rem; display: -webkit-inline-box">
         <div class="card-body">
           <h5 class="card-title">${employee[i].name}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">${employee[i].id}</h6>
-          <a href="#" class="card-link">${employee[i].email}</a>
-          <a href="https://github.com/${employee[i].GitHub}" class="card-link">${employee[i].GitHub}</a>
+          <h5 class="card-title">${employee[i].constructor.name}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">ID: ${employee[i].id}</h6>
+          <a href="#" class="card-link">Email: ${employee[i].email}</a>
+          <a href="https://github.com/${employee[i].GitHub}" class="card-link">GitHub: ${employee[i].GitHub}</a>
         </div>`;
     } else if (employee[i].constructor.name == "Intern") {
       console.log("we have an Intern");
       addHTML =
         addHTML +
         `
-      <div class="card" style="width: 18rem">
+      <div class="card" style="width: 18rem; display: -webkit-inline-box">
         <div class="card-body">
           <h5 class="card-title">${employee[i].name}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">${employee[i].id}</h6>
-          <a href="#" class="card-link">${employee[i].email}</a>
-          <a href="#" class="card-link">${employee[i].school}</a>
+          <h5 class="card-title">${employee[i].constructor.name}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">ID: ${employee[i].id}</h6>
+          <a href="#" class="card-link">Email: ${employee[i].email}</a>
+          <a href="#" class="card-link">School: ${employee[i].school}</a>
         </div>`;
     }
     console.log(addHTML);
