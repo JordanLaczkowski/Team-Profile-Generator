@@ -4,9 +4,7 @@ const Intern = require("./lib/Intern.js");
 const Engineer = require("./lib/Engineer.js");
 const Manager = require("./lib/Manager.js");
 
-// //console.log(
-//   `Welcome to Team Profile Generator. Use 'npm run reset' to reset the dist folder. Build your team`
-// );
+console.log(`Welcome to Team Profile Generator. Build your team.`);
 managerQuestions = [
   {
     type: "input",
@@ -113,6 +111,7 @@ internQuestions = [
 let employee = [];
 
 function generateIndexHtml(employee) {
+  console.log("GENERATE INDEX HTML " + employee);
   const page = `<!DOCTYPE html>
 <html lang="en">
   <head>
@@ -126,22 +125,7 @@ function generateIndexHtml(employee) {
     />
   </head>
   <body>
-    <div>
-      <div class="card" style="width: 18rem">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
-        </div>
-      </div>
-
       ${generateEmployeeCard(employee)}
-
       <!-- cards here -->
   
       <!--icon for what is picked -->
@@ -169,7 +153,7 @@ inquirer.prompt(managerQuestions).then((data) => {
 
 function addIntern() {
   inquirer.prompt(internQuestions).then((data) => {
-    var newIntern = new Intern(data.name, data.id, data.email);
+    var newIntern = new Intern(data.name, data.id, data.email, data.school);
     console.log(`Intern Added!`);
     employee.push(newIntern);
     addNextPerson(data.type);
@@ -178,7 +162,7 @@ function addIntern() {
 
 function addEngineer() {
   inquirer.prompt(engineerQuestions).then((data) => {
-    var newEngineer = new Engineer(data.name, data.id, data.email);
+    var newEngineer = new Engineer(data.name, data.id, data.email, data.GitHub);
     console.log(`Engineer Added!`);
     employee.push(newEngineer);
     addNextPerson(data.type);
@@ -208,50 +192,50 @@ function addNextPerson(choice) {
 }
 
 function generateEmployeeCard(employee) {
-  console.log(employee);
-  employee.map((employee) => {
-    if (employee == "Engineer") {
-      return `<ul>
-      <li> ${employee.name}
-      
-      </li>
-      <li> ${employee.id}
-      
-      </li>
-      <li> ${employee.email}
-      
-      </li>
-      <li> ${employee.GitHub}
-      
-      </li>
-      </ul>`;
-    } else {
-      return `To be added later`;
+  var addHTML = "";
+  console.log("GENERATE EMPLOYEE CARD: " + employee);
+  for (i = 0; i < employee.length; i++) {
+    console.log("THIS IS THE CLASS" + employee[i].constructor.name);
+    if (employee[i].constructor.name == "Manager") {
+      console.log("we have an Manager");
+      addHTML =
+        addHTML +
+        `
+      <div class="card" style="width: 18rem">
+        <div class="card-body">
+          <h5 class="card-title">${employee[i].name}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">${employee[i].id}</h6>
+          <a href="#" class="card-link">${employee[i].email}</a>
+          <a href="#" class="card-link">${employee[i].officeNumber}</a>
+        </div>`;
+    } else if (employee[i].constructor.name == "Engineer") {
+      console.log("we have an Engineer");
+      addHTML =
+        addHTML +
+        `
+      <div class="card" style="width: 18rem">
+        <div class="card-body">
+          <h5 class="card-title">${employee[i].name}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">${employee[i].id}</h6>
+          <a href="#" class="card-link">${employee[i].email}</a>
+          <a href="https://github.com/${employee[i].GitHub}" class="card-link">${employee[i].GitHub}</a>
+        </div>`;
+    } else if (employee[i].constructor.name == "Intern") {
+      console.log("we have an Intern");
+      addHTML =
+        addHTML +
+        `
+      <div class="card" style="width: 18rem">
+        <div class="card-body">
+          <h5 class="card-title">${employee[i].name}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">${employee[i].id}</h6>
+          <a href="#" class="card-link">${employee[i].email}</a>
+          <a href="#" class="card-link">${employee[i].school}</a>
+        </div>`;
     }
-  });
-}
-function generateEmployeeCard(employee) {
-  console.log(employee);
-  employee.map((employee) => {
-    if (employee == "Intern") {
-      return `<ul>
-      <li> ${employee.name}
-      
-      </li>
-      <li> ${employee.id}
-      
-      </li>
-      <li> ${employee.email}
-      
-      </li>
-      <li> ${employee.school}
-      
-      </li>
-      </ul>`;
-    } else {
-      return `To be added later`;
-    }
-  });
+    console.log(addHTML);
+  }
+  return addHTML;
 }
 
 //console log of what occured 'team manager added' 'team engineer added'
