@@ -221,7 +221,7 @@ function generateEmployeeCard(employee) {
           <h5 class="card-title">${employee[i].constructor.name}</h5>
           <h6 class="card-subtitle mb-2 text-muted">ID: ${employee[i].id}</h6>
           <a href="#" class="card-link">Email: ${employee[i].email}</a>
-          <a href="https://github.com/${employee[i].GitHub}" class="card-link">GitHub: ${employee[i].GitHub}</a>
+          <a href="https://github.com/${employee[i].GitHub}" target="_blank" class="card-link">GitHub: ${employee[i].GitHub}</a>
         </div>`;
     } else if (employee[i].constructor.name == "Intern") {
       console.log("we have an Intern");
