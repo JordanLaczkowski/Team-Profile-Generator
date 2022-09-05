@@ -104,10 +104,6 @@ internQuestions = [
   },
 ];
 
-// var engineers = new Array();
-// var manager = new Array();
-// var interns = new Array();
-
 let employee = [];
 
 function generateIndexHtml(employee) {
@@ -142,14 +138,6 @@ function generateIndexHtml(employee) {
 
 inquirer.prompt(managerQuestions).then((data) => {
   addManager(data);
-
-  // if (data.type == "Engineer") {
-  //   addEngineer();
-  // } else if (data.type == "Intern") {
-  //   addIntern();
-  // } else {
-  //   return;
-  // }
 });
 
 function addIntern() {
@@ -207,7 +195,7 @@ function generateEmployeeCard(employee) {
           <h5 class="card-title">${employee[i].name}</h5>
           <h5 class="card-title">${employee[i].constructor.name}</h5>
           <h6 class="card-subtitle mb-2 text-muted">ID: ${employee[i].id}</h6>
-          <a href="#" class="card-link">Email: ${employee[i].email}</a>
+          <a href="mailto:${employee[i].mail}" class="card-link">Email: ${employee[i].email}</a>
           <a href="#" class="card-link">Office Number: ${employee[i].officeNumber}</a>
         </div>`;
     } else if (employee[i].constructor.name == "Engineer") {
@@ -220,7 +208,7 @@ function generateEmployeeCard(employee) {
           <h5 class="card-title">${employee[i].name}</h5>
           <h5 class="card-title">${employee[i].constructor.name}</h5>
           <h6 class="card-subtitle mb-2 text-muted">ID: ${employee[i].id}</h6>
-          <a href="#" class="card-link">Email: ${employee[i].email}</a>
+          <a href="mailto:${employee[i].mail}" class="card-link">Email: ${employee[i].email}</a>
           <a href="https://github.com/${employee[i].GitHub}" target="_blank" class="card-link">GitHub: ${employee[i].GitHub}</a>
         </div>`;
     } else if (employee[i].constructor.name == "Intern") {
@@ -233,7 +221,7 @@ function generateEmployeeCard(employee) {
           <h5 class="card-title">${employee[i].name}</h5>
           <h5 class="card-title">${employee[i].constructor.name}</h5>
           <h6 class="card-subtitle mb-2 text-muted">ID: ${employee[i].id}</h6>
-          <a href="#" class="card-link">Email: ${employee[i].email}</a>
+          <a href="mailto:${employee[i].mail}" class="card-link">Email: ${employee[i].email}</a>
           <a href="#" class="card-link">School: ${employee[i].school}</a>
         </div>`;
     }
