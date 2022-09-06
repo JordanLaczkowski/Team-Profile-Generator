@@ -40,10 +40,3 @@ test("added a school to an intern", () => {
   const int = new Intern(name, id, "email", school);
   expect(int.school).toBe("DU");
 });
-
-// ✓ create an intern (2 ms)
-// ✓ added a name to an intern
-// ✕ added an id to an intern
-// ✓ added a role to an intern (1 ms)
-// ✕ added an email to an intern
-// ✕ added a school to an intern

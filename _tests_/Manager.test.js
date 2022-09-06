@@ -40,10 +40,3 @@ test("added a school to a manager", () => {
   const manag = new Manager(name, id, "email", officeNumber);
   expect(manag.officeNumber).toBe("2");
 });
-
-// ✓ create a manager (2 ms)
-// ✓ added a name to a manager (1 ms)
-// ✕ added an id to a manager
-// ✓ added a role to a manager
-// ✕ added an email to a manager (1 ms)
-// ✕ added a school to a manager

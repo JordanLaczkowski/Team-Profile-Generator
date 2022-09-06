@@ -40,10 +40,3 @@ test("added an github to an engineer", () => {
   const eng = new Engineer(name, id, "email", GitHub);
   expect(eng.GitHub).toBe("JordanLaczkowski");
 });
-
-//  ✓ create an engineer (6 ms)
-// ✓ added a name to an engineer
-// ✕ added an id to an engineer
-// ✓ added a role to an engineer (1 ms)
-// ✕ added an email to an engineer
-// ✕ added an github to an engineer (1 ms)
